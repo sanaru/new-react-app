@@ -1,10 +1,12 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 
 // server configuration
 const PROTOCOL = 'http://';
 const HOST = 'localhost';
 const PORT = '3000';
+const JSON_DIR = path.resolve( __dirname, 'jsons' );
 
 const SERVER_URL = PROTOCOL + HOST + ':' + PORT;
 
@@ -31,3 +33,20 @@ app.use( ( req, res, next ) => {
 app.get('/test', (req, res) => {
     res.send( 'WORKING' );
 });
+
+// delay middleware function
+const delay = ( delay = 100 ) => {
+    return ( request, response, next ) => {
+        setTimeout( next, delay );
+    };
+};
+
+
+// submit form and return JSON resoonse
+app.get( '/jsons/:file', delay( 1000 ), ( req, res ) => {
+
+    // HTTP status header
+    //res.status( 401 );
+    res.sendFile( path.resolve( JSON_DIR, req.params.file ) );
+    
+} );

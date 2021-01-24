@@ -14,10 +14,11 @@ module.exports = {
       compress: true,
       hot: true,
       port: 8080,
+      inline: false
     },
 
     entry: {
-        main: [ '@babel/polyfill', ...path.resolve(__dirname, './src/index.js') ],
+        main:  path.resolve(__dirname, './src/index.js'),
     },
 
     output: {

@@ -1,5 +1,5 @@
 import { Home } from '../modules/home';
-import React, { Component } from 'react';
+import React from 'react';
 import {
     Switch,
     Route
